@@ -1,12 +1,13 @@
 import React from 'react'
 import butter from './butter-client'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
 
 export default class Homepage extends React.Component {
   state = {
     data: {
       fields: {
-        customer_logos: [],
+        navigation_links: [],
       },
     },
   }
@@ -27,19 +28,28 @@ export default class Homepage extends React.Component {
             content={fields.facebook_open_graph_title}
           /> */}
         </Helmet>
-        <h1>{fields.headline}</h1>
-        <img src={fields.logo} />
-        <button>{fields.call_to_action}</button>
-        <h3>Customers Love Us!</h3>
-        <ul>
-          {fields.customer_logos.map((logo) => {
-            return (
-              <li>
-                <img src={logo.logo_image} style={{ maxWidth: 200 }} />
-              </li>
-            )
-          })}
-        </ul>
+        <div className='main__nav'>
+          <div className='logo__container'>
+            <Link to='/'>
+              <img className='main__logo' src={fields.logo} alt='logo' />
+            </Link>
+          </div>
+          <ul className='main__nav-links'>
+            {fields.navigation_links.map((link) => {
+              return (
+                <a className='link__url' href={link.link_url} target='_blank'>
+                  <li className='main__nav-item'>
+                    {link.link_name}
+                    <li className='main__nav-sub'>Sub-link</li>
+                  </li>
+                </a>
+              )
+            })}
+          </ul>
+        </div>
+        <div className='content'>
+          <h1 className='headline'>{fields.headline}</h1>
+        </div>
       </div>
     )
   }

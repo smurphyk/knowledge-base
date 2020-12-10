@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import './index.css'
+
 // import Blog from './Blog'
 // import BlogPost from './BlogPost'
 // import Categories from './Categories'

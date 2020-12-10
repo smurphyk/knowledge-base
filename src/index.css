@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.main__nav {
+  display: flex;
+  background-color: #c2c2c2;
+  border-right: 3px groove black;
+  flex-direction: column;
+  left: 0;
+  top: 0;
+  position: absolute;
+  height: 100%;
+  width: 20%;
+}
+
+.logo__container {
+  border-bottom: 3px groove black;
+  padding: 1rem 0.1rem;
+  width: 100%;
+}
+
+.main__logo {
+  max-width: 95%;
+}
+
+.main__nav-links {
+  list-style: none;
+  margin-top: 3rem;
+}
+
+.link__url {
+  color: #000;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.main__nav-item {
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
+}
+
+.main__nav-sub {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin-left: 1rem;
+  line-height: 2rem;
+}
+
+.content {
+  text-align: center;
+}
