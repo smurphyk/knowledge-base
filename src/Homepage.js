@@ -20,35 +20,49 @@ export default class Homepage extends React.Component {
     const { fields } = this.state.data
 
     return (
-      <div>
+      <div className='home__container'>
         <Helmet>
           <title>{fields.seo_title}</title>
-          {/* <meta
-            property='og:title'
-            content={fields.facebook_open_graph_title}
-          /> */}
         </Helmet>
         <div className='main__nav'>
           <div className='logo__container'>
-            <Link to='/'>
-              <img className='main__logo' src={fields.logo} alt='logo' />
+            <Link to={Homepage}>
+              <img src={fields.logo} alt='logo' className='main__logo' />
             </Link>
           </div>
           <ul className='main__nav-links'>
             {fields.navigation_links.map((link) => {
               return (
-                <a className='link__url' href={link.link_url} target='_blank'>
+                <Link to={link.url_slug} className='main__nav-url'>
                   <li className='main__nav-item'>
-                    {link.link_name}
-                    <li className='main__nav-sub'>Sub-link</li>
+                    {link.navigation_item_label}
+                    <ul className='sub__nav-item'>{fields.navigation_}</ul>
                   </li>
-                </a>
+                </Link>
               )
             })}
           </ul>
         </div>
         <div className='content'>
           <h1 className='headline'>{fields.headline}</h1>
+          <p className='introduction'>
+            The PUX Knowledge base is a one-stop shop for team members and
+            clients alike.
+            <br />
+            <br />
+            As a member of the team, you can find anything from information
+            related to working at PUX to templates to increase efficiency and
+            decrease frustration, as well as a place to post any training
+            materials you create to help other team members.
+            <br />
+            <br />
+            As a client of PUX, this knowledge base offers information that will
+            help you understand our process in more depth. Examples of what you
+            will find include: Process flows or diagrams, definitions and
+            explainers, and client-specific templates with instructions. Here at
+            PUX, we know how awesome we are, and we use full transparency so you
+            will too.
+          </p>
         </div>
       </div>
     )
