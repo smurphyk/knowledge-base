@@ -13,7 +13,7 @@ export default class Homepage extends React.Component {
   }
   async componentDidMount() {
     const { match } = this.props
-    const resp = await butter.page.retrieve('*', 'homepage')
+    const resp = await butter.page.retrieve('*', 'homepage', { levels: 4 })
     this.setState(resp.data)
   }
   render() {
@@ -25,20 +25,45 @@ export default class Homepage extends React.Component {
           <title>{fields.seo_title}</title>
         </Helmet>
         <div className='main__nav'>
-          <div className='logo__container'>
-            <Link to={Homepage}>
-              <img src={fields.logo} alt='logo' className='main__logo' />
-            </Link>
-          </div>
           <ul className='main__nav-links'>
+            <Link to={Homepage}>
+              <div className='logo__container'>
+                <img src={fields.logo} alt='logo' className='main__logo' />
+              </div>
+            </Link>
             {fields.navigation_links.map((link) => {
+              console.log(link.child_items)
               return (
-                <Link to={link.url_slug} className='main__nav-url'>
-                  <li className='main__nav-item'>
+                <li className='main__nav-item' key=''>
+                  <Link to={link.url_slug} className='main__nav-url'>
                     {link.navigation_item_label}
-                    <ul className='sub__nav-item'>{fields.navigation_}</ul>
-                  </li>
-                </Link>
+                  </Link>
+                  <ul className='second__nav-links'>
+                    {link.child_items.map((child) => {
+                      return (
+                        <li className='second__nav-item'>
+                          <Link to={child.url_slug} className='second__nav-url'>
+                            {child.navigation_label}
+                          </Link>
+                          <ul className='third__nav-links'>
+                            {child.child_items.map((grandChild) => {
+                              return (
+                                <li className='third__nav-item'>
+                                  <Link
+                                    to={grandChild.url_slug}
+                                    className='third__nav-url'
+                                  >
+                                    {grandChild.navigation_label}
+                                  </Link>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </li>
               )
             })}
           </ul>
