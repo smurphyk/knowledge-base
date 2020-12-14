@@ -43,7 +43,7 @@ export default class Homepage extends React.Component {
                       return (
                         <li className='second__nav-item'>
                           <Link to={child.url_slug} className='second__nav-url'>
-                            {child.navigation_label}
+                            {child.navigation_item_label}
                           </Link>
                           <ul className='third__nav-links'>
                             {child.child_items.map((grandChild) => {
@@ -53,7 +53,7 @@ export default class Homepage extends React.Component {
                                     to={grandChild.url_slug}
                                     className='third__nav-url'
                                   >
-                                    {grandChild.navigation_label}
+                                    {grandChild.navigation_item_label}
                                   </Link>
                                 </li>
                               )
