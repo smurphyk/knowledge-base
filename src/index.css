@@ -6,45 +6,52 @@ body,
 html {
   background-color: #1a1f64;
   box-sizing: border-box;
+  font-family: 'proxima-nova', sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .main__nav {
-  display: flex;
+  display: block;
   background-color: #ebebeb;
   border-right: 3px groove black;
-  flex-direction: column;
   left: 0;
   top: 0;
-  position: absolute;
+  position: fixed;
   height: 100%;
-  width: 25%;
+  width: 23%;
 }
 
 .logo__container {
   border-bottom: 3px groove black;
-  padding: 1rem 0.1rem;
+  padding: 1rem 0;
   width: 100%;
 }
 
 .main__logo {
   display: block;
-  margin-left: 0.4rem;
-  max-width: 95%;
+  margin: 0 auto;
+  max-width: 75%;
 }
 
 .main__nav-links {
   color: #ed4a8b;
+  font-size: 16px !important;
   margin-top: 3rem;
   text-decoration: none;
 }
 
 .main__nav-item {
+  color: #1a1f64;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 0.1rem;
   list-style: none;
   margin-bottom: 1rem;
+}
+
+.main__nav-item:hover {
+  color: #ed4a8b;
 }
 
 .main__nav-url {
@@ -52,24 +59,23 @@ html {
 }
 
 .content {
+  margin-left: 20rem;
+  margin-top: 3rem;
   text-align: center;
+  max-width: 100%;
 }
 
 .headline {
-  color: #ed4a8b;
-  position: relative;
-  top: 10%;
-  right: -14%;
+  color: #fff;
 }
 
 .introduction {
-  color: #ed4a8b;
+  color: #fff;
+  display: block;
   font-size: 24px;
   letter-spacing: 0.1rem;
   line-height: 2.2rem;
   margin: 4rem auto;
-  position: relative;
-  right: -15%;
   text-align: left;
-  width: 50%;
+  width: 75%;
 }
