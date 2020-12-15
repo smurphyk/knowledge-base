@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 
 export default class Homepage extends React.Component {
+  // Setting necessary content from Butter as the state
   state = {
     data: {
       fields: {
@@ -13,6 +14,8 @@ export default class Homepage extends React.Component {
   }
   async componentDidMount() {
     const { match } = this.props
+
+    // API Call
     const resp = await butter.page.retrieve('*', 'homepage', { levels: 4 })
     this.setState(resp.data)
   }
@@ -24,20 +27,23 @@ export default class Homepage extends React.Component {
         <Helmet>
           <title>{fields.seo_title}</title>
         </Helmet>
+
+        {/* Navigation Menu using items from a Collection in Butter */}
         <div className='main__nav'>
           <ul className='main__nav-links'>
             <Link to={Homepage}>
-              <div className='logo__container'>
-                <img src={fields.logo} alt='logo' className='main__logo' />
-              </div>
+              <img src={fields.logo} alt='logo' className='main__logo' />
             </Link>
+
+            {/* Map through all first-level links in collection */}
             {fields.navigation_links.map((link) => {
-              console.log(link.child_items)
               return (
                 <li className='main__nav-item' key=''>
                   <Link to={link.url_slug} className='main__nav-url'>
                     {link.navigation_item_label}
                   </Link>
+
+                  {/* Map through references in first-level collection for second-level links */}
                   <ul className='second__nav-links'>
                     {link.child_items.map((child) => {
                       return (
@@ -45,6 +51,8 @@ export default class Homepage extends React.Component {
                           <Link to={child.url_slug} className='second__nav-url'>
                             {child.navigation_item_label}
                           </Link>
+
+                          {/* Map through references in second-level collection for third-level links */}
                           <ul className='third__nav-links'>
                             {child.child_items.map((grandChild) => {
                               return (
@@ -68,6 +76,7 @@ export default class Homepage extends React.Component {
             })}
           </ul>
         </div>
+        {/* Content to the right of the navigation */}
         <div className='content'>
           <h1 className='headline'>{fields.headline}</h1>
           <p className='introduction'>
