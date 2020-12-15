@@ -2,6 +2,10 @@ import React from 'react'
 import butter from './butter-client'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleRight, faAngleDown } from '@fortawesome/free-solid-svg-icons'
+
+import Collapsible from './components/Collapsible'
 
 export default class Homepage extends React.Component {
   // Setting necessary content from Butter as the state
@@ -13,12 +17,13 @@ export default class Homepage extends React.Component {
     },
   }
   async componentDidMount() {
-    const { match } = this.props
+    // const { match } = this.props
 
     // API Call
     const resp = await butter.page.retrieve('*', 'homepage', { levels: 4 })
     this.setState(resp.data)
   }
+
   render() {
     const { fields } = this.state.data
 
@@ -34,17 +39,23 @@ export default class Homepage extends React.Component {
             <Link to={Homepage}>
               <img src={fields.logo} alt='logo' className='main__logo' />
             </Link>
-
             {/* Map through all first-level links in collection */}
             {fields.navigation_links.map((link) => {
               return (
                 <li className='main__nav-item' key=''>
-                  <Link to={link.url_slug} className='main__nav-url'>
-                    {link.navigation_item_label}
-                  </Link>
-
+                  <div className='parent__link'>
+                    <Link to={link.url_slug} className='main__nav-url'>
+                      {link.navigation_item_label}
+                    </Link>
+                    <button className='collapse__button'>
+                      <FontAwesomeIcon
+                        className='fa-angle-down'
+                        icon={faAngleDown}
+                      />
+                    </button>
+                  </div>
                   {/* Map through references in first-level collection for second-level links */}
-                  <ul className='second__nav-links'>
+                  <ul id='child__links' className='second__nav-links'>
                     {link.child_items.map((child) => {
                       return (
                         <li className='second__nav-item'>
@@ -53,15 +64,18 @@ export default class Homepage extends React.Component {
                           </Link>
 
                           {/* Map through references in second-level collection for third-level links */}
-                          <ul className='third__nav-links'>
-                            {child.child_items.map((grandChild) => {
+                          <ul
+                            id='grandchild__links'
+                            className='third__nav-links'
+                          >
+                            {child.child_items.map((grandchild) => {
                               return (
                                 <li className='third__nav-item'>
                                   <Link
-                                    to={grandChild.url_slug}
+                                    to={grandchild.url_slug}
                                     className='third__nav-url'
                                   >
-                                    {grandChild.navigation_item_label}
+                                    {grandchild.navigation_item_label}
                                   </Link>
                                 </li>
                               )

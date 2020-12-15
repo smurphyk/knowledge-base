@@ -37,6 +37,28 @@ html {
   width: 100%;
 }
 
+.collapse__button {
+  background-color: #1a1f64;
+  border: none;
+  height: 2rem;
+  margin-left: 1rem;
+  width: 2rem;
+}
+
+.collapse__button:hover {
+  cursor: pointer;
+}
+
+.fa-angle-right,
+.fa-angle-down {
+  color: #fff;
+  font-size: 20px;
+}
+
+.parent__link {
+  display: flex;
+}
+
 .main__nav-item {
   font-size: 20px;
   letter-spacing: 0.1rem;
